@@ -31,8 +31,9 @@ export function tr808(args) {
   this.i = this.i || 0;
   let drum = arg(args[0], NaN);
   let volume = arg(args[1], 1);
+  let len = TR808Samples.length;
   if (!isNaN(drum) && !isNaN(volume)) {
-    let sample = TR808Samples[((drum%TR808Samples.length)+TR808Samples.length)%TR808Samples.length];
+    let sample = TR808Samples[(((drum|0)%len)+len)%len];
     if (this.i * 2 + 0x80 + 1 < sample.length) {
       let hi = sample.charCodeAt(0x80 + this.i * 2+1);
       let lo = sample.charCodeAt(0x80 + this.i * 2);
