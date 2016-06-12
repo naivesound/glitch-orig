@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build && electron index.js",
-    "build": "webpack -p --config ../webpack.config.js --output-path=build",
+    "build": "NODE_ENV='production' webpack -p --config ../webpack.config.js --output-path=build",
     "pkg-linux": "electron-packager ./ --out=pkg --overwrite --platform=linux --arch=x64",
     "pkg-windows": "electron-packager ./ --out=pkg --icon=glitch.ico --overwrite --platform=win32 --arch=ia32",
     "pkg-darwin": "electron-packager ./ --out=pkg --icon=glitch.icns --overwrite --platform=darwin --arch=x64",

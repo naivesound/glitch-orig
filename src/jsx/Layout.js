@@ -4,6 +4,10 @@ import { GREEN, GRAY, PINK } from '../colors';
 
 import App from './App';
 
+export function isElectron() {
+  return window && window.process && window.process.type;
+}
+
 const layoutStyle = {
   backgroundColor: GREEN,
   fontFamily: 'Roboto Mono, monospace',
@@ -53,7 +57,7 @@ export default class Layout extends React.Component {
   }
   render() {
     let app = <App />;
-    if (!window.navigator.appVersion.match(/Electron/) &&
+    if (!isElectron() &&
         this.state.width > 800 && this.state.height > 500) {
       app = (<div style={flexColumStyle}>
         <SocialIcons />
