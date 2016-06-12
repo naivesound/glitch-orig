@@ -1,7 +1,7 @@
 {
   "name": "glitch",
   "productName": "Glitch",
-  "version": "0.0.8",
+  "version": "0.1.0",
   "description": "Algorithmic music synthesizer",
   "main": "index.js",
   "scripts": {
