@@ -40,7 +40,6 @@ export default class Glitch {
       applyNext = false;
       this.measure++;
       if (this.measure > this.sampleRate * 60 / bpm) {
-        console.log('apply', this.measure, this.sampleRate * 60 / bpm);
         this.measure = 0;
         applyNext = true;
       }
