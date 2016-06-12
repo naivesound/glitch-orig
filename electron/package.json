@@ -5,7 +5,8 @@
   "description": "Algorithmic music synthesizer",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && electron index.js",
+    "start": "npm run build && npm run launch",
+    "launch": "electron index.js",
     "build": "NODE_ENV='production' webpack -p --config ../webpack.config.js --output-path=build",
     "pkg-linux": "electron-packager ./ --out=pkg --overwrite --platform=linux --arch=x64",
     "pkg-windows": "electron-packager ./ --out=pkg --icon=glitch.ico --overwrite --platform=win32 --arch=ia32",
