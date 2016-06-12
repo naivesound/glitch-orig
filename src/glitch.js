@@ -2,6 +2,10 @@ import * as expr from 'expr';
 import * as functions from './glitchFuncs';
 import * as samples from './glitchSamples';
 
+function funcs() {
+  return Object.assign({}, functions, samples, window.userFuncs || {});
+}
+
 export default class Glitch {
   constructor(sampleRate = 44100) {
     this.expr = () => 0;
@@ -12,16 +16,15 @@ export default class Glitch {
   reset() {
     this.vars = {
       t: expr.varExpr(0),
-      x: expr.varExpr(),
+      x: expr.varExpr(0),
       y: expr.varExpr(0),
     };
-    this.funcs = Object.assign({}, functions, samples)
-    this.expr = expr.parse(this.src, this.vars, this.funcs);
+    this.expr = expr.parse(this.src, this.vars, funcs());
     this.frame = 0;
     this.measure = 0;
   }
   compile(e) {
-    const f = expr.parse(e, this.vars, this.funcs);
+    const f = expr.parse(e, this.vars, funcs());
     if (f) {
       this.next = {src: e, expr: f};
       return true;
