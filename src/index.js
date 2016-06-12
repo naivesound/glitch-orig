@@ -71,11 +71,14 @@ const store = createStore(combineReducers({
   uriMiddleware
 ));
 
-// Initialize glitch with default/current expression
+// Initialize glitch with default/current expression, optionally do autoplay
 if (window.location.hash) {
   store.dispatch(actions.setExpr(decodeURIComponent(window.location.hash.substring(1))));
 } else {
   store.dispatch(actions.setExpr(store.getState().expr.expr));
+}
+if (window.location.search === '?play') {
+  store.dispatch(actions.play());
 }
 
 document.onmousemove = (e) => {
