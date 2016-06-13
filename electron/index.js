@@ -22,6 +22,7 @@ function injectPlugins() {
 }
 
 function injectSamples() {
+  mainWindow.webContents.executeJavaScript('var sampleCache = {};');
   mainWindow.webContents.executeJavaScript(loadSamples.toString());
   try {
     fs.readdirSync('samples').forEach(function(sample) {
@@ -43,15 +44,14 @@ function injectSamples() {
 function loadSamples(name, paths) {
   var fs = require('electron').remote.require('fs');
   window.userFuncs[name] = function(args) {
-    this.cache = this.cache || {};
     var index = (args[0] ? args[0]() : 0);
     var volume = (args[1] ? args[1]() : 1);
     let len = paths.length;
     if (!isNaN(index) && !isNaN(volume)) {
       let sample = paths[(((index|0)%len)+len)%len];
-      this.cache[sample] = this.cache[sample] || fs.readFileSync(sample);
-      if (this.i * 2 + 0x80 + 1 < this.cache[sample].length) {
-        let v = this.cache[sample].readInt16LE(0x80 + this.i * 2);
+      sampleCache[sample] = sampleCache[sample] || fs.readFileSync(sample);
+      if (this.i * 2 + 0x80 + 1 < sampleCache[sample].length) {
+        let v = sampleCache[sample].readInt16LE(0x80 + this.i * 2);
         let x =  v / 0x7fff;
         this.i++;
         return x * volume * 127 + 128;
