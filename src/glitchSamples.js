@@ -10,14 +10,14 @@ import b64sn from './samples/sn.wav';
 
 const TR808Samples = [
   atob(b64bd),
-  atob(b64cb),
-  atob(b64cl),
-  atob(b64hh),
-  atob(b64mc),
-  atob(b64mt),
-  atob(b64oh),
-  atob(b64rs),
   atob(b64sn),
+  atob(b64mt),
+  atob(b64mc),
+  atob(b64rs),
+  atob(b64cl),
+  atob(b64cb),
+  atob(b64oh),
+  atob(b64hh),
 ];
 
 function arg(x, defaultValue) {
