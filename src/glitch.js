@@ -11,15 +11,15 @@ export default class Glitch {
     this.expr = () => 0;
     this.src = '';
     this.sampleRate = sampleRate;
-    this.reset();
-  }
-  reset() {
     this.vars = {
       t: expr.varExpr(0),
       x: expr.varExpr(0),
       y: expr.varExpr(0),
     };
-    this.expr = expr.parse(this.src, this.vars, funcs());
+    this.reset();
+  }
+  reset() {
+    this.vars.t(0);
     this.frame = 0;
     this.measure = 0;
   }
@@ -32,26 +32,28 @@ export default class Glitch {
     return false;
   }
   nextSample() {
+    if (this.next) {
+      let applyNext = true;
+      const bpm = (this.vars.bpm ? this.vars.bpm() : 0);
+      if (bpm) {
+        applyNext = false;
+        this.measure++;
+        if (this.measure > this.sampleRate * 60 / bpm) {
+          this.measure = 0;
+          applyNext = true;
+        }
+      }
+      if (applyNext) {
+        this.expr = this.next.expr;
+        this.src = this.next.src;
+        this.next = undefined;
+      }
+    }
     const v = this.expr();
     if (!isNaN(v)) {
       this.lastSample = (((v % 256) + 256) % 256) / 128 - 1;
     }
     this.frame++;
-    let applyNext = true;
-    const bpm = (this.vars.bpm ? this.vars.bpm() : 0);
-    if (bpm) {
-      applyNext = false;
-      this.measure++;
-      if (this.measure > this.sampleRate * 60 / bpm) {
-        this.measure = 0;
-        applyNext = true;
-      }
-    }
-    if (applyNext && this.next) {
-      this.expr = this.next.expr;
-      this.src = this.next.src;
-      this.next = undefined;
-    }
     this.vars.t(Math.round(this.frame * 8000 / this.sampleRate));
     return this.lastSample;
   }
