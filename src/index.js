@@ -13,7 +13,7 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 
 import Layout from './jsx/Layout';
-import { expr, playback, navigation, playbackMode } from './reducers';
+import { expr, playback, navigation, playbackMode, tab } from './reducers';
 
 import * as actions from './actions';
 import * as audio from './audio';

@@ -1,6 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import { YELLOW, WHITE, PINK } from '../colors';
+
+import * as actions from '../actions';
 
 import * as functions from '../glitchFuncs';
 import * as samples from '../glitchSamples';
@@ -42,7 +45,7 @@ math operators, variables and functions to compose more complex expressions.
 Bitwise operators truncate numbers to integer values.
 
 * Example: [x=6,(y=x+1,x*y)](#) - returns 42
-* Example: [t*5&(t>>7)|t*3&(t*4>>10)](/?play#t) - bytebeat music
+* Example: [t*5&(t>>7)|t*3&(t*4>>10)](#) - bytebeat music
 
 # FUNCTIONS
 
@@ -156,6 +159,12 @@ function allFuncs() {
     .sort().join(' ');
 }
 
+function unescape(s) {
+  var e = document.createElement('div');
+  e.innerHTML = s;
+  return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+}
+
 function mmd(src) {
   var h='';
   function escape(t) { return new Option(t).innerHTML; }
@@ -190,8 +199,21 @@ function mmd(src) {
   return h;
 };
 
-export default function Help() {
-  return (<div className="help" style={helpWrapperStyle}>
+export default connect()(function Help(props) {
+  console.log(props);
+  return (<div className="help" style={helpWrapperStyle} ref={(el) => {
+    if (el) {
+      const links = el.querySelectorAll('a');
+      for (let i = 0; i < links.length; i++) {
+        const a = links[i];
+        a.onclick = (e) => {
+          e.preventDefault();
+          props.dispatch(actions.setExpr(unescape(a.innerHTML)));
+          props.dispatch(actions.play());
+        }
+      }
+    }
+  }}>
     <div style={helpStyle} dangerouslySetInnerHTML={{__html: mmd(HELP+allFuncs())}} />
   </div>);
-}
+});
