@@ -291,13 +291,19 @@ export function mix(args) {
   let v = 0;
   this.lastSamples = this.lastSamples || {};
   for (let i = 0; i < args.length; i++) {
-    let sample = args[i]();
+    let arg = args[i];
+    let volume = 1;
+    if (arg.car) {
+      volume = arg.car();
+      arg = arg.cdr;
+    }
+    let sample = arg();
     if (isNaN(sample)) {
       sample = this.lastSamples[i] || 0;
     } else {
       this.lastSamples[i] = sample;
     }
-    v = v + (sample - 128) / 127;
+    v = v + volume * (sample - 128) / 127;
   }
   if (args.length > 0) {
     v = v / Math.sqrt(args.length);
