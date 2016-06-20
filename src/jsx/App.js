@@ -29,6 +29,7 @@ const headerStyle = {
   height: '72px',
   lineHeight: '72px',
   fontSize: '18pt',
+  flexShrink: '0',
 };
 
 const titleStyle = {

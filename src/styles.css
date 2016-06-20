@@ -10,6 +10,23 @@ a {
 a:hover {
   color: #fff;
 }
+.help h1 {
+  color: white;
+  font-size: 1rem;
+  line-height: 3rem;
+  text-align: center;
+}
+.help p, .help ul {
+  margin-bottom: 1rem;
+}
+.help em {
+  color: grey;
+  font-style: normal;
+}
+.help strong {
+  color: white;
+  font-style: normal;
+}
 ::-webkit-scrollbar {
   width:  4px;
   height: 4px;
