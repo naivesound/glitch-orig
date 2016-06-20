@@ -42,6 +42,7 @@ const audioMiddleware = store => next => action => {
         audioMiddleware.errorTimeout = setTimeout(() =>
           store.dispatch(actions.error('syntax error')), 500);
       } else {
+        localStorage.setItem('expr', action.expr);
         store.dispatch(actions.error());
       }
       break;
@@ -74,6 +75,8 @@ const store = createStore(combineReducers({
 // Initialize glitch with default/current expression, optionally do autoplay
 if (window.location.hash) {
   store.dispatch(actions.setExpr(decodeURIComponent(window.location.hash.substring(1))));
+} else if (localStorage.getItem('expr')) {
+  store.dispatch(actions.setExpr(localStorage.getItem('expr')));
 } else {
   store.dispatch(actions.setExpr(store.getState().expr.expr));
 }
