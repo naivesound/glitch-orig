@@ -29,6 +29,10 @@ class Editor extends React.Component {
   render() {
     return (<textarea
       ref="editor"
+      autoComplete="off"
+      autoCorrect="off"
+      autocapitalize="off"
+      spellCheck={false}
       value={this.props.expr}
       onChange={(e) => this.handleTextChange(e)}
       style={editorStyle}
