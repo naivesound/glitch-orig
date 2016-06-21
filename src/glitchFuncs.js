@@ -193,7 +193,13 @@ function next(args, seq, f) {
 // Switches values evaluating the current value on each call
 export function loop(args) {
   return next(args, this, (a, i, offset) => {
-    const res = a[i + 1]();
+    let arg = a[i + 1];
+    this.mul = 1;
+    if (arg.car) {
+      this.mul = arg.car();
+      arg = arg.cdr;
+    }
+    const res = arg();
     return offset === 0 ? NaN : res;
   });
 }
