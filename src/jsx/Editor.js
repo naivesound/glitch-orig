@@ -31,7 +31,7 @@ class Editor extends React.Component {
       ref="editor"
       autoComplete="off"
       autoCorrect="off"
-      autocapitalize="off"
+      autoCapitalize="off"
       spellCheck={false}
       value={this.props.expr}
       onChange={(e) => this.handleTextChange(e)}
