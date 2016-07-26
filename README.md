@@ -4,6 +4,8 @@ This is the original Glitch, a minimal synthesizer and composer for algorithmic 
 
 That's why Glitch has been rewritten.
 
+## The latest Glitch
+
 The new (and the only active) Glitch is available at https://github.com/naivesound/glitch and a live web app is at http://naivesound.com/glitch
 
 Original web version of Glitch is still available at http://naivesound.com/glitch-orig if you want to compare.
