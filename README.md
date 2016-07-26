@@ -1,10 +1,12 @@
-# Glitch
+# The Original Glitch
 
-[![Build Status](https://travis-ci.org/naivesound/glitch.svg?branch=master)](https://travis-ci.org/naivesound/glitch)
-[![Dependency Status](https://david-dm.org/naivesound/glitch.svg)](https://david-dm.org/naivesound/glitch)
-[![devDependency Status](https://david-dm.org/naivesound/glitch/dev-status.svg)](https://david-dm.org/naivesound/glitch#info=devDependencies)
+This is the original Glitch, a minimal synthesizer and composer for algorithmic music. It's been fully written in ES6 + React, including the expression evaluation engine. The performance became a problem, on an average PC one can't code a song of more than ~20-30 lines of Gltich code.
 
-Glitch is a minimal synthesizer and composer for algorithmic music.
+That's why Glitch has been rewritten.
+
+The new (and the only active) Glitch is available at https://github.com/naivesound/glitch and a live web app is at http://naivesound.com/glitch
+
+Original web version of Glitch is still available at http://naivesound.com/glitch-orig if you want to compare.
 
 ## Reference
 
